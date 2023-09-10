@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/quasar@2.12.5/dist/quasar.prod.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>Formulario</title>
+  </head>
+  <body>
+    <div id="q-app">
+      <q-layout>
+        <q-page-container>
+          <q-page class="container" padding>
+            <p
+              class="text-h4"
+              style="
+                text-align: center;
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: bold;
+              "
+            >
+              Formulário
+            </p>
+
+            <div class="row">
+              <form
+                action="./cadastro_resultado.html"
+                method="get"
+                id="form"
+                ref="myForm"
+                style="width: 80%; margin: 0 10% 0 10%"
+                class="q-col-gutter-sm"
+                @submit="onSubmit"
+                @reset="onReset"
+              >
+                <q-input
+                  required
+                  name="nome"
+                  outlined
+                  clearable
+                  clear-icon="close"
+                  v-model="form.nome"
+                  color="indigo-13"
+                  label="Nome Completo"
+                  class="col-md-10 col-sm-10 com-xs-10"
+                  :rules="[(val) => (val && val.length > 0) || 'Digite Seu Nome']"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="person" />
+                  </template>
+                </q-input>
+
+                <q-input
+                  required
+                  name="CPF"
+                  outlined
+                  clearable
+                  clear-icon="close"
+                  v-model="form.cpf"
+                  color="indigo-13"
+                  label="CPF"
+                  class="col-md-10 col-sm-10 com-xs-10"
+                  :rules="[(val) => (val && val.length > 0) || 'Digite Seu CPF']"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="person" />
+                  </template>
+                </q-input>
+
+                <q-input
+                  required
+                  name="dataNascimento"
+                  outlined
+                  v-model="form.dataNascimento"
+                  color="indigo-13"
+                  type="date"
+                  label="Data de Nascimento"
+                  class="col-md-10 col-sm-10 col-xs-10"
+                  :rules="[
+                  (val) => (val && val.length > 0) || 'Coloque a Data de Nascimento',
+                ]"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="event" />
+                  </template>
+                </q-input>
+
+                <q-input
+                  required
+                  name="endereco"
+                  outlined
+                  clearable
+                  clear-icon="close"
+                  v-model="form.endereco"
+                  color="indigo-13"
+                  label="Endereço"
+                  class="col-md-10 col-sm-10 col-xs-10"
+                  :rules="[(val) => (val && val.length > 0) || 'Digite Seu Endereço']"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="place" />
+                  </template>
+                </q-input>
+
+                <div class="q-gutter-md row">
+                  <q-input
+                    required
+                    name="bairro"
+                    type="text"
+                    outlined
+                    clearable
+                    clear-icon="close"
+                    v-model="form.bairro"
+                    color="indigo-13"
+                    label="Bairro"
+                    class="col-md-4 col-sm-4 col-xs-4"
+                    :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="place" />
+                    </template>
+                  </q-input>
+
+                  <q-input
+                    required
+                    name="cidade"
+                    type="text"
+                    outlined
+                    clearable
+                    clear-icon="close"
+                    v-model="form.cidade"
+                    color="indigo-13"
+                    label="Cidade"
+                    class="col-md-4 col-sm-4 col-xs-4"
+                    :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="place" />
+                    </template>
+                  </q-input>
+
+                  <q-input
+                    required
+                    name="cep"
+                    type="text"
+                    outlined
+                    clearable
+                    clear-icon="close"
+                    v-model="form.cep"
+                    color="indigo-13"
+                    label="Cep"
+                    class="col-md-2 col-sm-2 col-xs-2"
+                    :rules="[(val) => (val && val.length > 0) || 'Digite Seu Endereço']"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="place" />
+                    </template>
+                  </q-input>
+
+                  <q-select
+                    required
+                    name="uf"
+                    outlined
+                    v-model="form.uf"
+                    :options="options"
+                    color="indigo-13"
+                    label="UF"
+                    class="col-md-1 col-sm-1 col-xs-1"
+                    :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
+                  ></q-select>
+                </div>
+
+                <q-input
+                  required
+                  name="email"
+                  outlined
+                  clearable
+                  clear-icon="close"
+                  v-model="form.email"
+                  type="email"
+                  label="Email"
+                  suffix="@gmail.com"
+                  class="col-md-10 col-sm-10 col-xs-10"
+                  :rules="[(val) => (val && val.length > 0) || 'Email Obrigatório']"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="mail" />
+                  </template>
+                </q-input>
+
+                <q-input
+                  required
+                  name="telefone"
+                  outlined
+                  clearable
+                  clear-icon="close"
+                  v-model="form.telefone"
+                  label="Telefone"
+                  mask="(##) ### - ######"
+                  unmasked-value
+                  class="col-md-10 col-sm-10 col-xs-10"
+                  :rules="[
+                  (val) => (val && val.length > 0) || 'Telefone Obrigatório',
+                  (val) => val.length === 11 || 'Telefone Inválido',
+                ]"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="phone" />
+                  </template>
+                </q-input>
+
+                <q-input
+                  required
+                  name="login"
+                  outlined
+                  clearable
+                  clear-icon="close"
+                  v-model="form.login"
+                  label="login"
+                  class="col-md-10 col-sm-10 col-xs-10"
+                  :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="person" />
+                  </template>
+                </q-input>
+
+                <q-input
+                  required
+                  name="senha"
+                  :type="isPwd ? 'password' : 'text'"
+                  outlined
+                  clearable
+                  clear-icon="close"
+                  v-model="form.senha"
+                  label="Senha"
+                  class="col-md-10 col-sm-10 col-xs-10"
+                  :rules="[
+                  (val) => (val && val.length > 0) || 'Campo Obrigatório',
+                  (val) => val.length > 4 || 'Mínimo de 5 caracteres',
+                ]"
+                >
+                  <template v-slot:append>
+                    <q-icon
+                      :name="isPwd ? 'visibility_off' : 'visibility'"
+                      class="cursor-pointer"
+                      @click="mostrando"
+                    />
+                  </template>
+                </q-input>
+
+                <!-- dois botões -->
+                <div class="col-10">
+                  <q-btn
+                    label="Cadastrar"
+                    type="submit"
+                    color="primary"
+                  ></q-btn>
+                </div>
+              </form>
+            </div>
+          </q-page>
+        </q-page-container>
+      </q-layout>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.12.5/dist/quasar.umd.prod.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            isPwd: true,
+            form: {
+              nome: "",
+              cpf: "",
+              dataNascimento: null,
+              endereco: "",
+              bairro: "",
+              cidade: "",
+              uf: null,
+              email: "",
+              telefone: "",
+              login: "",
+              senha: "",
+            },
+            options: ["PA", "PR", "RS", "CE"],
+          };
+        },
+
+        methods: {
+          mostrando() {
+            this.isPwd = !this.isPwd;
+          },
+
+          async onReset() {
+            await this.resetForm();
+            this.$refs.myForm.resetValidation();
+          },
+          async resetForm() {
+            this.form = {
+              nome: "",
+              cpf: "",
+              dataNascimento: null,
+              endereco: "",
+              bairro: "",
+              cidade: "",
+              uf: "",
+              email: "",
+              telefone: "",
+              login: "",
+              senha: "",
+            };
+          },
+        },
+      });
+
+      app.use(Quasar);
+      app.mount("#q-app");
+    </script>
+  </body>
+</html>
