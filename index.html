@@ -31,14 +31,13 @@
               Formulário
             </p>
 
-            <div class="row">
+            <div class="row justify-center">
               <form
+                class="col-md-10"
                 action="./cadastro_resultado.html"
                 method="get"
                 id="form"
                 ref="myForm"
-                style="width: 80%; margin: 0 10% 0 10%"
-                class="q-col-gutter-sm"
                 @submit="onSubmit"
                 @reset="onReset"
               >
@@ -51,7 +50,6 @@
                   v-model="form.nome"
                   color="indigo-13"
                   label="Nome Completo"
-                  class="col-md-10 col-sm-10 com-xs-10"
                   :rules="[(val) => (val && val.length > 0) || 'Digite Seu Nome']"
                 >
                   <template v-slot:prepend>
@@ -68,7 +66,6 @@
                   v-model="form.cpf"
                   color="indigo-13"
                   label="CPF"
-                  class="col-md-10 col-sm-10 com-xs-10"
                   :rules="[(val) => (val && val.length > 0) || 'Digite Seu CPF']"
                 >
                   <template v-slot:prepend>
@@ -84,7 +81,6 @@
                   color="indigo-13"
                   type="date"
                   label="Data de Nascimento"
-                  class="col-md-10 col-sm-10 col-xs-10"
                   :rules="[
                   (val) => (val && val.length > 0) || 'Coloque a Data de Nascimento',
                 ]"
@@ -103,7 +99,6 @@
                   v-model="form.endereco"
                   color="indigo-13"
                   label="Endereço"
-                  class="col-md-10 col-sm-10 col-xs-10"
                   :rules="[(val) => (val && val.length > 0) || 'Digite Seu Endereço']"
                 >
                   <template v-slot:prepend>
@@ -111,25 +106,24 @@
                   </template>
                 </q-input>
 
-                <div class="q-gutter-md row">
-                  <q-input
-                    required
-                    name="bairro"
-                    type="text"
-                    outlined
-                    clearable
-                    clear-icon="close"
-                    v-model="form.bairro"
-                    color="indigo-13"
-                    label="Bairro"
-                    class="col-md-4 col-sm-4 col-xs-4"
-                    :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
-                  >
-                    <template v-slot:prepend>
-                      <q-icon name="place" />
-                    </template>
-                  </q-input>
+                <q-input
+                  required
+                  name="bairro"
+                  type="text"
+                  outlined
+                  clearable
+                  clear-icon="close"
+                  v-model="form.bairro"
+                  color="indigo-13"
+                  label="Bairro"
+                  :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="place" />
+                  </template>
+                </q-input>
 
+                <div class="row justify-between">
                   <q-input
                     required
                     name="cidade"
@@ -140,14 +134,13 @@
                     v-model="form.cidade"
                     color="indigo-13"
                     label="Cidade"
-                    class="col-md-4 col-sm-4 col-xs-4"
+                    class="col-md-6 col-sm-6 col-xs-12"
                     :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
                   >
                     <template v-slot:prepend>
                       <q-icon name="place" />
                     </template>
                   </q-input>
-
                   <q-input
                     required
                     name="cep"
@@ -158,7 +151,7 @@
                     v-model="form.cep"
                     color="indigo-13"
                     label="Cep"
-                    class="col-md-2 col-sm-2 col-xs-2"
+                    class="col-md-3 col-sm-3 col-xs-12"
                     :rules="[(val) => (val && val.length > 0) || 'Digite Seu Endereço']"
                   >
                     <template v-slot:prepend>
@@ -167,6 +160,7 @@
                   </q-input>
 
                   <q-select
+                    class="col-md-2 col-sm-2 col-xs-12"
                     required
                     name="uf"
                     outlined
@@ -174,9 +168,12 @@
                     :options="options"
                     color="indigo-13"
                     label="UF"
-                    class="col-md-1 col-sm-1 col-xs-1"
                     :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
-                  ></q-select>
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="location_on" />
+                    </template>
+                  </q-select>
                 </div>
 
                 <q-input
@@ -189,7 +186,6 @@
                   type="email"
                   label="Email"
                   suffix="@gmail.com"
-                  class="col-md-10 col-sm-10 col-xs-10"
                   :rules="[(val) => (val && val.length > 0) || 'Email Obrigatório']"
                 >
                   <template v-slot:prepend>
@@ -207,7 +203,6 @@
                   label="Telefone"
                   mask="(##) ### - ######"
                   unmasked-value
-                  class="col-md-10 col-sm-10 col-xs-10"
                   :rules="[
                   (val) => (val && val.length > 0) || 'Telefone Obrigatório',
                   (val) => val.length === 11 || 'Telefone Inválido',
@@ -226,7 +221,6 @@
                   clear-icon="close"
                   v-model="form.login"
                   label="login"
-                  class="col-md-10 col-sm-10 col-xs-10"
                   :rules="[(val) => (val && val.length > 0) || 'Campo Obrigatório']"
                 >
                   <template v-slot:prepend>
@@ -243,7 +237,6 @@
                   clear-icon="close"
                   v-model="form.senha"
                   label="Senha"
-                  class="col-md-10 col-sm-10 col-xs-10"
                   :rules="[
                   (val) => (val && val.length > 0) || 'Campo Obrigatório',
                   (val) => val.length > 4 || 'Mínimo de 5 caracteres',
